@@ -20,9 +20,23 @@ return {
     ["<leader>b"] = { name = "Buffers" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" },
+    ["re"] = { "<cmd>RustRunnables<cr>", desc = "Open Rust Runnables" },
+    ["rr"] = { "<cmd>RustRun<cr>", desc = "Quick run Rust" },
+    ["<A-k>"] = {"<cmd>m-2<cr>", desc = "Moves line one up"},
+    ["<A-j>"] = {"<cmd>m+<cr>", desc = "Moves line one Down"},
+    -- LSP additional bindings for good shit 
+    ["<leader>lr"] = {vim.lsp.buf.rename, desc = "Rename"},
   },
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
+  },
+  i = {
+      -- viter
+      ["<C-s>"] = { "<esc>:w<cr>a", desc = "Save File" },
+      ["<C-t>"] = { "<esc>:w<cr>", desc = "Save File + enter normal mode" },
+      ["<A-k>"] = {"<esc>:m-2<cr>a", desc = "Moves line one up"},
+      ["<A-j>"] = {"<esc>:m+<cr>a", desc = "Moves line one Down"},
   },
 }
