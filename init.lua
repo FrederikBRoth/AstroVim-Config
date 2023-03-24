@@ -77,11 +77,20 @@ return {
       server = {
         on_attach = function(_, bufnr)
           -- Hover actions
-          vim.keymap.set("n", "kk", rt.hover_actions.hover_actions, { buffer = bufnr })
+          vim.keymap.set("n", "qq", rt.hover_actions.hover_actions, { buffer = bufnr })
           -- Code action groups
           vim.keymap.set("n", "aa", rt.code_action_group.code_action_group, { buffer = bufnr })
+
+          
         end,
         cmd = { "rustup", "run", "stable", "rust-analyzer" },
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy",
+            }
+          }
+        }
       },
       dap = {
         adapter = require('rust-tools.dap').get_codelldb_adapter(
