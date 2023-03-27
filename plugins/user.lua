@@ -1,5 +1,6 @@
 return {
-  "simrat39/rust-tools.nvim"
+  "simrat39/rust-tools.nvim",
+  { "ErichDonGubler/lsp_lines.nvim", opts = {}, event = "User AstroFile" },
   -- You can also add new plugins here as well:
   -- Add plugins, the lazy syntax
   -- "andweeb/presence.nvim",

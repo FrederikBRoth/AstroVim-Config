@@ -4,7 +4,6 @@
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
 return {
-
   -- first key is the mode
   n = {
     -- second key is the lefthand side of the map
@@ -12,7 +11,9 @@ return {
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
-        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)
+        require("astronvim.utils.status").heirline.buffer_picker(
+          function(bufnr) require("astronvim.utils.buffer").close(bufnr) end
+        )
       end,
       desc = "Pick to close",
     },
@@ -24,20 +25,29 @@ return {
     ["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" },
     ["re"] = { "<cmd>RustRunnables<cr>", desc = "Open Rust Runnables" },
     ["rr"] = { "<cmd>RustRun<cr>", desc = "Quick run Rust" },
-    ["<A-k>"] = {"<cmd>m-2<cr>", desc = "Moves line one up"},
-    ["<A-j>"] = {"<cmd>m+<cr>", desc = "Moves line one Down"},
-    -- LSP additional bindings for good shit 
-    ["<leader>lr"] = {vim.lsp.buf.rename, desc = "Rename"},
+    ["rw"] = { "<cmd>RustDebuggables<cr>", desc = "Open Rust Debuggables" },
+    ["<A-k>"] = { "<cmd>m-2<cr>", desc = "Moves line one up" },
+    ["<A-j>"] = { "<cmd>m+<cr>", desc = "Moves line one Down" },
+    -- LSP additional bindings for good shit
+    ["<leader>lr"] = { vim.lsp.buf.rename, desc = "Rename" },
+    ["æb"] = {
+      function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Next buffer",
+    },
+    ["øb"] = {
+      function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
+      desc = "Previous buffer",
+    },
   },
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
   },
   i = {
-      -- viter
-      ["<C-s>"] = { "<esc>:w<cr>a", desc = "Save File" },
-      ["<C-t>"] = { "<esc>:w<cr>", desc = "Save File + enter normal mode" },
-      ["<A-k>"] = {"<esc>:m-2<cr>a", desc = "Moves line one up"},
-      ["<A-j>"] = {"<esc>:m+<cr>a", desc = "Moves line one Down"},
+    -- viter
+    ["<C-s>"] = { "<esc>:w<cr>a", desc = "Save File" },
+    ["<C-t>"] = { "<esc>:w<cr>", desc = "Save File + enter normal mode" },
+    ["<A-k>"] = { "<esc>:m-2<cr>a", desc = "Moves line one up" },
+    ["<A-j>"] = { "<esc>:m+<cr>a", desc = "Moves line one Down" },
   },
 }
