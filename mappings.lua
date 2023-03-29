@@ -30,11 +30,11 @@ return {
     ["<A-j>"] = { "<cmd>m+<cr>", desc = "Moves line one Down" },
     -- LSP additional bindings for good shit
     ["<leader>lr"] = { vim.lsp.buf.rename, desc = "Rename" },
-    ["æb"] = {
+    ["øb"] = {
       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
       desc = "Next buffer",
     },
-    ["øb"] = {
+    ["æb"] = {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },

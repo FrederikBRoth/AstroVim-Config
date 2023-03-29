@@ -103,6 +103,32 @@ return {
     vim.diagnostic.config {
       virtual_text = false,
     }
+
+    local events = require "neo-tree.events"
+    events.subscribe {
+      event = events.NEO_TREE_WINDOW_AFTER_CLOSE,
+      handler = function()
+        if require("dap").session() then require("dapui").open { reset = true } end
+      end,
+    }
+    dap.listeners.before.event_initialized["place-neotree-edge"] = function()
+      vim.cmd ":Neotree close"
+      vim.cmd ":Neotree reveal"
+    end
+    dap.listeners.after.event_exited["reset-neotree"] = function()
+      vim.cmd ":Neotree focus"
+      vim.cmd "wincmd 30|"
+      vim.cmd "wincmd p"
+    end
+
+    vim.cmd "Neotree toggle"
+    --
+    -- dap.listeners.after.event_initialized["test2"] = function() vim.cmd "wincmd p" end
+    -- dap.listeners.after.event_exited["test3"] = function() vim.cmd "wincmd p" end
+    -- dap.listeners.after.event_terminated["reset-neotree"] = function()
+    --   require("neo-tree").close_all()
+    --   vim.cmd ":Neotree toggle"
+    -- end
     --Set up custom filetypes
     -- vim.filetype.add {
     --   extension = {
