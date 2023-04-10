@@ -3,9 +3,17 @@
 -- Please use this mappings table to set keyboard mapping since this is the
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
+local crates = require('crates')
+local opts = {silent = true}
 return {
   -- first key is the mode
   n = {
+
+    -- crates commands
+    vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts)
+vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts)
+vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts)
+
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -29,7 +37,7 @@ return {
     ["<A-k>"] = { "<cmd>m-2<cr>", desc = "Moves line one up" },
     ["<A-j>"] = { "<cmd>m+<cr>", desc = "Moves line one Down" },
     -- LSP additional bindings for good shit
-    ["<leader>lr"] = { vim.lsp.buf.rename, desc = "Rename" },
+   
     ["øb"] = {
       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
       desc = "Next buffer",
@@ -46,7 +54,7 @@ return {
   i = {
     -- viter
     ["<C-s>"] = { "<esc>:w<cr>a", desc = "Save File" },
-    ["<C-t>"] = { "<esc>:w<cr>", desc = "Save File + enter normal mode" },
+    ["<C-a>"] = { "<esc>:w<cr>", desc = "Save File + enter normal mode" },
     ["<A-k>"] = { "<esc>:m-2<cr>a", desc = "Moves line one up" },
     ["<A-j>"] = { "<esc>:m+<cr>a", desc = "Moves line one Down" },
   },
