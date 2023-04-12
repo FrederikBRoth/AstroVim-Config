@@ -50,23 +50,6 @@ return {
 
             -- "pyright"
         },
-
-       
-
-        setup_handlers = {
-            -- add custom handler
-            rust_analyzer = function(_, opts)
-                require("rust-tools").setup {
-                    server = opts,
-                    dap = {
-                        adapter = require("rust-tools.dap").get_codelldb_adapter(vim.env.HOME ..
-                                                                                     "/.vscode-server/extensions/vadimcn.vscode-lldb-1.9.0/" ..
-                                                                                     "adapter/codelldb", vim.env.HOME ..
-                            "/.vscode-server/extensions/vadimcn.vscode-lldb-1.9.0/" .. "lldb/lib/liblldb.so")
-                    }
-                }
-            end
-        },
        
 
     },
