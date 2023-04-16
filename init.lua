@@ -1,4 +1,3 @@
-
 return {
     -- Configure AstroNvim updates
     updater = {
@@ -65,6 +64,8 @@ return {
             }
         }
     },
+
+    colorscheme = "kanagawa",
     -- This function is run last and is a good place to configuring
     -- augroups/autocommands and custom filetypes also this just pure lua so
     -- anything that doesn't fit in the normal config locations above can go here
@@ -93,6 +94,10 @@ return {
             vim.cmd "wincmd p"
         end
         vim.cmd "Neotree toggle"
+
+        -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+        --   vim.api.nvim_set_hl(0, group, {})
+        -- end
         --
         -- dap.listeners.after.event_initialized["test2"] = function() vim.cmd "wincmd p" end
         -- dap.listeners.after.event_exited["test3"] = function() vim.cmd "wincmd p" end
