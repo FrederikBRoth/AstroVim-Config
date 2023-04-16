@@ -6,7 +6,8 @@ return {
       requires = {
         "neovim/nvim-lspconfig",
         "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim"
+        "MunifTanjim/nui.nvim",
+        "williamboman/mason-lspconfig.nvim"
       },
       config = function()
         local navbuddy = require('nvim-navbuddy');

@@ -1,0 +1,78 @@
+{
+    "Paragraph": {
+        "prefix": [
+            "p",
+            "para"
+        ],
+        "body": [
+            "<p>",
+            "\t$1",
+            "</p>",
+            ""
+        ],
+        "description": "Paragraph element"
+    },
+    "Division": {
+        "prefix": [
+            "div"
+        ],
+        "body": [
+            "<div>",
+            "\t$1",
+            "</div>",
+            ""
+        ],
+        "description": "Division element"
+    },
+    "Table": {
+        "prefix": [
+            "table"
+        ],
+        "body": [
+            "<table>",
+            "\t<thead>",
+            "\t\t$1",
+            "\t</thead>",
+            "\t<tbody>",
+            "\t\t$2",
+            "\t</tbody>",
+            "</table>",
+            ""
+        ],
+        "description": "Table Snippet"
+    },
+    "Table Row": {
+        "prefix": [
+            "tr"
+        ],
+        "body": [
+            "<tr>",
+            "\t$1",
+            "</tr>",
+            ""
+        ],
+        "description": "Table Snippet"
+    },
+    "Table Header": {
+        "prefix": [
+            "th"
+        ],
+        "body": [
+            "<th>$1</th>",
+            ""
+        ],
+        "description": "Table Snippet"
+    },
+    "Table Data": {
+        "prefix": [
+            "td"
+        ],
+        "body": [
+            "<td>$1</td>",
+            ""
+        ],
+        "description": "Table Snippet"
+    }
+
+    
+}
