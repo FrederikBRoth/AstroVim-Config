@@ -7,7 +7,7 @@ local crates = require('crates')
 local opts = {
     silent = true
 }
-local lsp_text_toggle = false
+local lsp_text_toggle = true
 
 return {
     -- first key is the mode

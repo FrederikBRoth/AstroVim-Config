@@ -62,9 +62,6 @@ return {{
   lazy = false,
   config = function()
     require("lsp_lines").setup()
-    vim.diagnostic.config({
-      virtual_text = false,
-    })
   end,
 } -- You can also add new plugins here as well:
 -- Add plugins, the lazy syntax

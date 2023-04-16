@@ -94,7 +94,9 @@ return {
             vim.cmd "wincmd p"
         end
         vim.cmd "Neotree toggle"
-
+        
+        require("lsp_lines").toggle()
+        
         -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
         --   vim.api.nvim_set_hl(0, group, {})
         -- end
