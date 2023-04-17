@@ -25,7 +25,17 @@ return {
                 vim.diagnostic.config({
                     virtual_text = lsp_text_toggle
                 })
-            end
+            end,
+            desc = "Toggle LSP Lines"
+        },
+        ["<Space>ø"] = {
+            "<cmd>:Navbuddy<cr>",
+            desc = "Navbuddy toggle"
+        },
+
+        ["<C-space>"] = {
+                require("rust-tools").hover_actions.hover_actions,
+                desc = "Hover actions"
         },
 
         -- second key is the lefthand side of the map
