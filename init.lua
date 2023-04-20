@@ -16,8 +16,6 @@ return {
             --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
         }
     },
-    -- Set colorscheme to use
-    colorscheme = "astrodark",
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
         virtual_text = true,
@@ -94,8 +92,11 @@ return {
             vim.cmd "wincmd p"
         end
         vim.cmd "Neotree toggle"
+
+        vim.cmd "set pumblend=30"
+        vim.cmd "set winblend=30"
         
-        require("lsp_lines").toggle()
+        -- require("lsp_lines").toggle()
         
         -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
         --   vim.api.nvim_set_hl(0, group, {})

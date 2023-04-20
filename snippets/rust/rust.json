@@ -39,7 +39,7 @@
     "body": ["<td>$1</td>", ""],
     "description": "Table Snippet"
   },
-  "Table Data": {
+  "Span": {
     "prefix": ["span"],
     "body": ["<span>", "\t$1", "</span>", ""],
     "description": "Span Snippet"
