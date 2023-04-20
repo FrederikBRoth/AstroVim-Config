@@ -7,7 +7,6 @@ local crates = require('crates')
 local opts = {
     silent = true
 }
-local lsp_text_toggle = true
 
 return {
     -- first key is the mode
@@ -21,10 +20,6 @@ return {
         ["<leader>æ"] = {
             function()
                 require("lsp_lines").toggle()
-                lsp_text_toggle = not lsp_text_toggle
-                vim.diagnostic.config({
-                    virtual_text = lsp_text_toggle
-                })
             end,
             desc = "Toggle LSP Lines"
         },
@@ -76,14 +71,6 @@ return {
             "<cmd>RustDebuggables<cr>",
             desc = "Open Rust Debuggables"
         },
-        ["<A-k>"] = {
-            "<cmd>m-2<cr>",
-            desc = "Moves line one up"
-        },
-        ["<A-j>"] = {
-            "<cmd>m+<cr>",
-            desc = "Moves line one Down"
-        },
         -- LSP additional bindings for good shit
 
         ["øb"] = {
@@ -112,14 +99,6 @@ return {
         ["<C-a>"] = {
             "<esc>:w<cr>",
             desc = "Save File + enter normal mode"
-        },
-        ["<A-k>"] = {
-            "<esc>:m-2<cr>a",
-            desc = "Moves line one up"
-        },
-        ["<A-j>"] = {
-            "<esc>:m+<cr>a",
-            desc = "Moves line one Down"
         }
     }
 }
