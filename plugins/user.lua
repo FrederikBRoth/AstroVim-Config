@@ -60,7 +60,7 @@ return {{
         require("nvim-surround").setup()
     end
 }, {
-    "ErichDonGubler/lsp_lines.nvim",
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     dependencies = {"williamboman/mason-lspconfig.nvim"},
     lazy = false,
     config = function()

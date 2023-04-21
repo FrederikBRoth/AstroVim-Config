@@ -17,6 +17,7 @@ return { -- use mason-lspconfig to configure LSP installations
     "jay-babu/mason-nvim-dap.nvim",
     -- overrides `require("mason-nvim-dap").setup(...)`
     opts = {
-        ensure_installed = {"codelldb", "bash", "delve"}
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        ensure_installed = {"codelldb", "node2"}
     }
 }}
