@@ -59,6 +59,7 @@ return {{
                     program = '${file}',
                     cwd = vim.fn.getcwd(),
                     outFiles = {"${fileDirname}/build/dist/*.js"},
+                    preLaunchTask = "npx tsc",
                     sourceMaps = true,
                     protocol = 'inspector',
                     console = 'integratedTerminal'
