@@ -72,7 +72,7 @@ return {{
 }, {
     lazy = false,
     "ThePrimeagen/vim-be-good"
-  }, -- You can also add new plugins here as well:
+} -- You can also add new plugins here as well:
 -- Add plugins, the lazy syntax
 -- "andweeb/presence.nvim",
 -- {
