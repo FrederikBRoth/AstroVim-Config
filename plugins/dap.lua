@@ -1,3 +1,4 @@
+-- js-debugger-adapter from Mason package attempt
 -- return {{
 --     "jay-babu/mason-nvim-dap.nvim",
 --     opts = {
@@ -10,7 +11,6 @@
 --                     port = "${port}",
 --                     executable = {
 --                         command = "node",
---                         💀 Make sure to update this path to point to your installation
 --                         args = {"--inspect",
 --                                 vim.env.HOME .. "/.local/bin/vscode-js-debug/js-debug/src/dapDebugServer.js", "${port}"}
 --                     }
@@ -37,6 +37,8 @@
 --         }
 --     }
 -- }}
+-- This is the proper way to set dap adapter and config fils in AstroNvim. 
+-- https://astronvim.com/Recipes/dap
 return {{
     "jay-babu/mason-nvim-dap.nvim",
     opts = {
@@ -46,7 +48,6 @@ return {{
                 dap.adapters.node2 = {
                     type = "executable",
                     command = "node",
-                    -- 💀 Make sure to update this path to point to your installation
                     args = {"--inspect",
                             vim.env.HOME .. "/.local/share/nvim/mason/packages/node-debug2-adapter/out/src/nodeDebug.js"}
                 }
@@ -57,16 +58,40 @@ return {{
                     request = 'launch',
                     program = '${file}',
                     cwd = vim.fn.getcwd(),
+                    outFiles = {"${fileDirname}/build/dist/*.js"},
                     sourceMaps = true,
                     protocol = 'inspector',
                     console = 'integratedTerminal'
-                }, {
-                    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-                    name = 'Attach to process',
-                    type = 'node2',
-                    request = 'attach',
-                    processId = require'dap.utils'.pick_process
-                }}
+                } -- Viterkim work launch.json settings made into dap config syntax. Doesn't work 100%. 
+                -- Jest doesn't work at all, and setup init gives errors but does actually work despite that.
+                --
+                -- Its possible to just import a launch.json using the same syntax as VSCode. ':h dap-launch.json' for more details
+                -- {
+                --     type = "node2",
+                --     name = "vscode-jest-tests",
+                --     request = "launch",
+                --     args = {"--runInBand", "--coverage=false"},
+                --     cwd = "${workspaceFolder}",
+                --     console = "integratedTerminal",
+                --     internalConsoleOptions = "neverOpen",
+                --     program = "${workspaceFolder}/node_modules/jest/bin/jest"
+                -- }, {
+                --     name = "setup init",
+                --     type = "node2",
+                --     request = "launch",
+                --     protocol = "inspector",
+                --     cwd = "${workspaceFolder}",
+                --     preLaunchTask = "npm: build:js",
+                --     outFiles = {"${workspaceFolder}/build/dist/**/**.js"},
+                --     program = "${workspaceFolder}/bin/setup.ts",
+                --     sourceMaps = true,
+                --     args = {"init"},
+                --     env = {
+                --         TEMPLATES_PATH = "${workspaceFolder}/templates"
+                --     },
+                --     internalConsoleOptions = "openOnSessionStart"
+                -- }
+                }
 
                 dap.configurations.javascript = {{
                     name = 'Launch',
@@ -77,59 +102,8 @@ return {{
                     sourceMaps = true,
                     protocol = 'inspector',
                     console = 'integratedTerminal'
-                }, {
-                    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-                    name = 'Attach to process',
-                    type = 'node2',
-                    request = 'attach',
-                    processId = require'dap.utils'.pick_process
                 }}
             end
         }
     }
 }}
-
--- return {
---     "mfussenegger/nvim-dap",
---     dependencies = {{
---         "mxsdev/nvim-dap-vscode-js",
---         opts = {
---             debugger_cmd = {"js-debug-adapter"},
---             adapters = {"pwa-node"}
---         }
---     }, {
---         "theHamsta/nvim-dap-virtual-text",
---         config = true
---     }},
---     config = function()
---         local dap = require "dap"
-
---         local attach_node = {
---             type = "pwa-node",
---             request = "attach",
---             name = "Attach",
---             processId = require("dap.utils").pick_process,
---             cwd = "${workspaceFolder}"
---         }
-
---         dap.configurations.javascript = {{
---             type = "pwa-node",
---             request = "launch",
---             name = "Launch file",
---             program = "${file}",
---             cwd = "${workspaceFolder}"
---         }, attach_node}
---         dap.configurations.typescript = {{
---             type = "pwa-node",
---             request = "launch",
---             name = "Launch file",
---             program = "${file}",
---             cwd = "${workspaceFolder}",
---             sourceMaps = true,
---             protocol = "inspector",
---             console = "integratedTerminal",
---             resolveSourceMapLocations = {"${workspaceFolder}/dist/**/*.js", "${workspaceFolder}/**",
---                                          "!**/node_modules/**"}
---         }, attach_node}
---     end
--- }
