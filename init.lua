@@ -96,6 +96,19 @@ return {
 
         require("lsp_lines").toggle()
 
+        -- This is a terrible way to circumvent the errors, since there is most likely something wrong, but it works.
+        local banned_messages = {"The breakpoint is pending and will be resolved when debugging starts."}
+
+        vim.notify = function(msg, ...)
+
+            for _, banned in ipairs(banned_messages) do
+                if msg == banned then
+                    return
+                end
+            end
+            require("notify")(msg, ...)
+        end
+
         -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
         --   vim.api.nvim_set_hl(0, group, {})
         -- end

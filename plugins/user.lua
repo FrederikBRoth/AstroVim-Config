@@ -56,6 +56,7 @@ return {{
     opts = {}
 }, {
     "kylechui/nvim-surround",
+    lazy = false,
     config = function()
         require("nvim-surround").setup()
     end
@@ -72,6 +73,9 @@ return {{
 }, {
     lazy = false,
     "ThePrimeagen/vim-be-good"
+}, {
+    lazy = false,
+    'mg979/vim-visual-multi'
 } -- You can also add new plugins here as well:
 -- Add plugins, the lazy syntax
 -- "andweeb/presence.nvim",

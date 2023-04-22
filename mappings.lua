@@ -17,6 +17,30 @@ return {
         vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts),
         vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts),
 
+        -- :call vm#commands#add_curser_up(0, 1)
+
+        ["<A-Down>"] = {
+            function()
+                require("smart-splits").resize_down()
+            end,
+            desc = "Resize split down"
+        },
+        ["<A-Up>"] = {
+            function()
+                require("smart-splits").resize_up()
+            end,
+            desc = "Resize split up"
+        },
+
+        ["<C-Up>"] = {
+            "<cmd>:call vm#commands#add_cursor_up(0, 1)<cr>",
+            desc = "Resize split down"
+        },
+        ["<C-Down>"] = {
+            "<cmd>:call vm#commands#add_cursor_down(0, 1)<cr>",
+            desc = "Resize split down"
+        },
+
         ["<leader>æ"] = {
             function()
                 require("lsp_lines").toggle()
@@ -29,8 +53,8 @@ return {
         },
 
         ["<C-space>"] = {
-                require("rust-tools").hover_actions.hover_actions,
-                desc = "Hover actions"
+            require("rust-tools").hover_actions.hover_actions,
+            desc = "Hover actions"
         },
 
         -- second key is the lefthand side of the map
