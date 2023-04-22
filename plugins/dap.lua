@@ -52,18 +52,35 @@ return {{
                             vim.env.HOME .. "/.local/share/nvim/mason/packages/node-debug2-adapter/out/src/nodeDebug.js"}
                 }
 
-                dap.configurations.typescript = {{
+                vim.g.ts_build = function()
+                    local cmd = 'npx tsc'
+                    local f = os.execute(cmd)
+                    if f == 0 then
+                        print('\nBuild: ✔️ ')
+                    else
+                        print('\nBuild: ❌ (code: ' .. f .. ')')
+                    end
+                end
+
+                local ts_config = {{
                     name = 'Launch',
                     type = 'node2',
                     request = 'launch',
-                    program = '${file}',
                     cwd = vim.fn.getcwd(),
                     outFiles = {"${fileDirname}/build/dist/*.js"},
                     preLaunchTask = "npx tsc",
                     sourceMaps = true,
-                    protocol = 'inspector',
-                    console = 'integratedTerminal'
-                } -- Viterkim work launch.json settings made into dap config syntax. Doesn't work 100%. 
+                    -- protocol = 'inspector',
+                    -- console = 'integratedTerminal',
+                    program = function()
+                        if vim.fn.confirm('Build project?', '&yes\n&no', 2) == 1 then
+                            vim.g.ts_build()
+                        end
+                        return '${file}'
+                    end
+                }}
+
+                dap.configurations.typescript = ts_config -- Viterkim work launch.json settings made into dap config syntax. Doesn't work 100%. 
                 -- Jest doesn't work at all, and setup init gives errors but does actually work despite that.
                 --
                 -- Its possible to just import a launch.json using the same syntax as VSCode. ':h dap-launch.json' for more details
@@ -92,7 +109,7 @@ return {{
                 --     },
                 --     internalConsoleOptions = "openOnSessionStart"
                 -- }
-                }
+                -- }
 
                 dap.configurations.javascript = {{
                     name = 'Launch',
