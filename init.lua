@@ -43,10 +43,18 @@ return {
             -- end
         },
         -- enable servers that you already have installed without mason
+        
         servers = {
-
-            -- "pyright"
-        }
+            "wgsl_analyzer",
+          },
+        config = {
+            wgsl_analyzer = function()
+            return {
+            cmd = {"wgsl_analyzer"};
+            filetypes = {"wgsl"};
+            }
+        end,
+        },
     },
     -- Configure require("lazy").setup() options
     lazy = {
@@ -108,6 +116,8 @@ return {
             end
             require("notify")(msg, ...)
         end
+
+        vim.cmd "autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl"
 
         -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
         --   vim.api.nvim_set_hl(0, group, {})
