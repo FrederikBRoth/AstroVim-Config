@@ -5,21 +5,21 @@ return {
         channel = "stable", -- "stable" or "nightly"
         version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
         branch = "nightly", -- branch name (NIGHTLY ONLY)
-        commit = nil, -- commit hash (NIGHTLY ONLY)
+        commit = nil,      -- commit hash (NIGHTLY ONLY)
         pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
         skip_prompts = false, -- skip prompts about breaking changes
         show_changelog = true, -- show the changelog after performing an update
         auto_quit = false, -- automatically quit the current session after a successful update
-        remotes = { -- easily add new remotes to track
+        remotes = {        -- easily add new remotes to track
             --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
             --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
             --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
-        }
+        },
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
         virtual_text = true,
-        underline = true
+        underline = true,
     },
     lsp = {
         -- customize lsp formatting options
@@ -32,43 +32,42 @@ return {
                 },
                 ignore_filetypes = { -- disable format on save for specified filetypes
                     -- "python",
-                }
+                },
             },
             disabled = { -- disable formatting capabilities for the listed language servers
                 -- "sumneko_lua",
             },
-            timeout_ms = 1000 -- default format timeout
+            timeout_ms = 1000, -- default format timeout
             -- filter = function(client) -- fully override the default formatting function
             --   return true
             -- end
         },
         -- enable servers that you already have installed without mason
-        
+
         servers = {
             "wgsl_analyzer",
-          },
+        },
         config = {
             wgsl_analyzer = function()
-            return {
-            cmd = {"wgsl_analyzer"};
-            filetypes = {"wgsl"};
-            }
-        end,
+                return {
+                    cmd = { "wgsl_analyzer" },
+                    filetypes = { "wgsl" },
+                }
+            end,
         },
     },
     -- Configure require("lazy").setup() options
     lazy = {
         defaults = {
-            lazy = true
+            lazy = true,
         },
         performance = {
             rtp = {
                 -- customize default disabled vim plugins
-                disabled_plugins = {"tohtml", "gzip", "matchit", "netrwPlugin", "tarPlugin"}
-            }
-        }
+                disabled_plugins = { "tohtml", "gzip", "matchit", "netrwPlugin", "tarPlugin" },
+            },
+        },
     },
-
     colorscheme = "kanagawa",
     -- This function is run last and is a good place to configuring
     -- augroups/autocommands and custom filetypes also this just pure lua so
@@ -105,16 +104,13 @@ return {
         require("lsp_lines").toggle()
 
         -- This is a terrible way to circumvent the errors, since there is most likely something wrong, but it works.
-        local banned_messages = {"The breakpoint is pending and will be resolved when debugging starts."}
+        local banned_messages = { "The breakpoint is pending and will be resolved when debugging starts." }
 
         vim.notify = function(msg, ...)
-
             for _, banned in ipairs(banned_messages) do
-                if msg == banned then
-                    return
-                end
+                if msg == banned then return end
             end
-            require("notify")(msg, ...)
+            require "notify" (msg, ...)
         end
 
         vim.cmd "autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl"
@@ -139,5 +135,5 @@ return {
         --   },
         --   pattern = {
         --     ["~/%.config/foo/.*"] = "fooscript",
-    end
+    end,
 }
