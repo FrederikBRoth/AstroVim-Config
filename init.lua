@@ -42,8 +42,10 @@ return {
             --   return true
             -- end
         },
+        inlay_hints = {
+            enabled = true,
+        },
         -- enable servers that you already have installed without mason
-
     },
     -- Configure require("lazy").setup() options
     lazy = {
@@ -63,8 +65,7 @@ return {
     -- anything that doesn't fit in the normal config locations above can go here
     polish = function()
         local dap = require "dap"
-
-        -- local events = require "neo-tree.events"
+        vim.cmd "autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl"
         -- events.subscribe {
         --     event = events.NEO_TREE_WINDOW_AFTER_CLOSE,
         --     handler = function()
@@ -93,8 +94,7 @@ return {
         require("lsp_lines").toggle()
 
         -- This is a terrible way to circumvent the errors, since there is most likely something wrong, but it works.
-        local banned_messages = { "The breakpoint is pending and will be resolved when debugging starts." }
-
+        local banned_messages = { "The breakpoint is pending and will be resolved when debugging starts.", "LSP timeout" }
         vim.notify = function(msg, ...)
             for _, banned in ipairs(banned_messages) do
                 if msg == banned then return end
@@ -104,9 +104,9 @@ return {
 
         vim.cmd "set scrolloff=9999"
         vim.lsp.handlers["wgsl-analyzer/requestConfiguration"] = function(err, result, ctx, config)
-            return { 
+            return {
                 success = true,
-                customImports = { _dummy_ = "dummy"},
+                customImports = { _dummy_ = "dummy" },
                 shaderDefs = {},
                 trace = {
                     extension = false,
@@ -124,10 +124,8 @@ return {
                     nagaParsingErrors = true,
                     nagaValidationErrors = true,
                     nagaVersion = "main",
-                }
+                },
             }
-        end,
-        vim.cmd "autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl"
-
+        end
     end,
 }
