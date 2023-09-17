@@ -3,7 +3,7 @@ return {{
     dependencies = {"williamboman/mason-lspconfig.nvim", "nvim-dap"},
     ft = {"rust"},
     opts = function()
-        local extension_path = vim.env.HOME .. "/.vscode-server/extensions/vadimcn.vscode-lldb-1.9.0/"
+        local extension_path = "/home/fred/.local/share/nvim/mason/packages/codelldb/extension/"
         local codelldb_path = extension_path .. "adapter/codelldb"
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
         return {
@@ -76,7 +76,12 @@ return {{
 }, {
     lazy = false,
     'mg979/vim-visual-multi'
-}-- You can also add new plugins here as well:
+}
+-- ,{
+--     ft = "wgsl",
+--     'neoclide/coc.nvim'
+-- }
+    -- You can also add new plugins here as well:
 -- Add plugins, the lazy syntax
 -- "andweeb/presence.nvim",
 -- {

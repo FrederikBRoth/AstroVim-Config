@@ -4,14 +4,14 @@ return { -- use mason-lspconfig to configure LSP installations
     "williamboman/mason-lspconfig.nvim",
     -- overrides `require("mason-lspconfig").setup(...)`
     opts = {
-        ensure_installed = {"lua_ls", "rust_analyzer", "tsserver"}
+        ensure_installed = {"lua_ls", "rust_analyzer", "tsserver", "wgsl_analyzer@v0.6.0"}
     }
 }, -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
 {
     "jay-babu/mason-null-ls.nvim",
     -- overrides `require("mason-null-ls").setup(...)`
     opts = {
-        ensure_installed = {"eslint_d", "stylua", "rustfmt"}
+        ensure_installed = {"eslint_d", "stylua", "rustfmt",}
     }
 }, {
     "jay-babu/mason-nvim-dap.nvim",

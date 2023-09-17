@@ -44,17 +44,6 @@ return {
         },
         -- enable servers that you already have installed without mason
 
-        servers = {
-            "wgsl_analyzer",
-        },
-        config = {
-            wgsl_analyzer = function()
-                return {
-                    cmd = { "wgsl_analyzer" },
-                    filetypes = { "wgsl" },
-                }
-            end,
-        },
     },
     -- Configure require("lazy").setup() options
     lazy = {
@@ -113,27 +102,32 @@ return {
             require "notify" (msg, ...)
         end
 
+        vim.cmd "set scrolloff=9999"
+        vim.lsp.handlers["wgsl-analyzer/requestConfiguration"] = function(err, result, ctx, config)
+            return { 
+                success = true,
+                customImports = { _dummy_ = "dummy"},
+                shaderDefs = {},
+                trace = {
+                    extension = false,
+                    server = false,
+                },
+                inlayHints = {
+                    enabled = true,
+                    typeHints = true,
+                    parameterHints = true,
+                    structLayoutHints = true,
+                    typeVerbosity = "inner",
+                },
+                diagnostics = {
+                    typeErrors = true,
+                    nagaParsingErrors = true,
+                    nagaValidationErrors = true,
+                    nagaVersion = "main",
+                }
+            }
+        end,
         vim.cmd "autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl"
 
-        -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-        --   vim.api.nvim_set_hl(0, group, {})
-        -- end
-        --
-        -- dap.listeners.after.event_initialized["test2"] = function() vim.cmd "wincmd p" end
-        -- dap.listeners.after.event_exited["test3"] = function() vim.cmd "wincmd p" end
-        -- dap.listeners.aftjk:er.event_terminated["reset-neotree"] = function()
-        --   require("neo-tree").close_all()
-        --   vim.cmd ":Neotree toggle"
-        -- end
-        -- Set up custom filetypes
-        -- vim.filetype.add {
-        --   extension = {
-        --     foo = "fooscript",
-        --   },
-        --   filename = {
-        --     ["Foofile"] = "fooscript",
-        --   },
-        --   pattern = {
-        --     ["~/%.config/foo/.*"] = "fooscript",
     end,
 }
