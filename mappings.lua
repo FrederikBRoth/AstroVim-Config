@@ -16,7 +16,13 @@ return {
         vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts),
         vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts),
         vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts),
-
+        vim.keymap.set('n', '<leader>r', ':RunCode<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>rq', ':RunClose<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false }),
+        vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false }),
         -- :call vm#commands#add_curser_up(0, 1)
 
         ["<A-Down>"] = {
