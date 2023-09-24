@@ -14,6 +14,7 @@ My config for AstroNvim
 
 | Example                       | Command     | Result                         |
 | ----------------------------- | ----------- | ------------------------------ |
+| surround line                 | yss)        | (surround line)
 | surr\*ound_words              | ysiw)       | (surround_words)               |
 | \*make strings                | ys$"        | "make strings"                 |
 | \*line <br/> text\*           | yS2j}       | { <br/>line <br/> text <br/> } |
