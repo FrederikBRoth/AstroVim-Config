@@ -1,27 +1,34 @@
-# AstroVim-Config
+# AstroNvim Template
 
-<!--toc:start-->
+**NOTE:** This is for AstroNvim v5+
 
-- [AstroVim-Config](#astrovim-config)
-  - [Important bindings](#important-bindings) - [nvim-surround bindings](#nvim-surround-bindings)
-  <!--toc:end-->
+A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
-My config for AstroNvim
+## 🛠️ Installation
 
-## Important bindings
+#### Make a backup of your current nvim and shared folder
 
-### nvim-surround bindings
+```shell
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
+```
 
-| Example                       | Command     | Result                         |
-| ----------------------------- | ----------- | ------------------------------ |
-| surround line                 | yss)        | (surround line)
-| surr\*ound_words              | ysiw)       | (surround_words)               |
-| \*make strings                | ys$"        | "make strings"                 |
-| \*line <br/> text\*           | yS2j}       | { <br/>line <br/> text <br/> } |
-| [delete ar*ound me!]          | ds]         | delete around me!              |
-| remove \<b\>HTML t\*ags\</b\> | dst         | remove HTML tags               |
-| 'change quot\*es'             | cs'"        | "change quotes"                |
-| \<b\>or tag\*types\</b\>      | csth1\<CR\> | \<h1\>or tag types\</h1\>      |
-| delete(functi\*on calls)      | dsf         | function calls                 |
+#### Create a new user repository from this template
 
-This shit be good
+Press the "Use this template" button above to create a new repository to store your user configuration.
+
+You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
+
+#### Clone the repository
+
+```shell
+git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
+```
+
+#### Start Neovim
+
+```shell
+nvim
+```
