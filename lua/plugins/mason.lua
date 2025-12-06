@@ -18,10 +18,10 @@ return {
         "stylua",
 
         -- install debuggers
-        "debugpy",
+        -- "debugpy",
 
         -- install any other package
-        "tree-sitter-cli",
+        -- "tree-sitter-cli",
       },
     },
   },
