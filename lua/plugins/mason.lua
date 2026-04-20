@@ -11,11 +11,11 @@ return {
       ensure_installed = {
         -- install language servers
         "lua-language-server",
-        "wgsl-analyzer",
+        -- "wgsl-analyzer",
         "rust-analyzer",
 
         -- install formatters
-        "stylua",
+        -- "stylua",
 
         -- install debuggers
         -- "debugpy",

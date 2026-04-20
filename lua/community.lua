@@ -8,8 +8,8 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
   { import = "astrocommunity.code-runner.compiler-nvim" },
-  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.pack.ps1" },
+  -- { import = "astrocommunity.pack.tailwindcss" },
   -- import/override with your plugins folder
 }
