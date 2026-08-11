@@ -1,15 +1,20 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- Customize Treesitter
 
 ---@type LazySpec
 return {
-  "nvim-treesitter/nvim-treesitter",
+  "AstroNvim/astrocore",
+  ---@type AstroCoreOpts
   opts = {
-    ensure_installed = {
-      "lua",
-      "vim",
-      -- add more arguments for adding more treesitter parsers
+    treesitter = {
+      ensure_installed = { "vim", "lua" },
+      highlight = true,
+      textobjects = {
+        select = {
+          select_textobject = {
+            ["ak"] = { query = "@block.outer", desc = "around block" },
+          },
+        },
+      },
     },
   },
 }

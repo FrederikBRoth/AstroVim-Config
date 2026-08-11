@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -44,7 +42,20 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              target = nil,
+            },
+            -- check = {
+            --   extraArgs = {
+            --     target = vim.g.rust_target,
+            --   },
+            -- },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -58,24 +69,24 @@ return {
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
-      lsp_codelens_refresh = {
-        -- Optional condition to create/delete auto command group
-        -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
-        -- condition will be resolved for each client on each execution and if it ever fails for all clients,
-        -- the auto commands will be deleted for that buffer
-        cond = "textDocument/codeLens",
-        -- cond = function(client, bufnr) return client.name == "lua_ls" end,
-        -- list of auto commands to set
-        {
-          -- events to trigger
-          event = { "InsertLeave", "BufEnter" },
-          -- the rest of the autocmd options (:h nvim_create_autocmd)
-          desc = "Refresh codelens (buffer)",
-          callback = function(args)
-            if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
-          end,
-        },
-      },
+      -- lsp_codelens_refresh = {
+      --   -- Optional condition to create/delete auto command group
+      --   -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
+      --   -- condition will be resolved for each client on each execution and if it ever fails for all clients,
+      --   -- the auto commands will be deleted for that buffer
+      --   cond = "textDocument/codeLens",
+      --   -- cond = function(client, bufnr) return client.name == "lua_ls" end,
+      --   -- list of auto commands to set
+      --   {
+      --     -- events to trigger
+      --     event = { "InsertLeave", "BufEnter" },
+      --     -- the rest of the autocmd options (:h nvim_create_autocmd)
+      --     desc = "Refresh codelens (buffer)",
+      --     callback = function(args)
+      --       if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
+      --     end,
+      --   },
+      -- },
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
@@ -92,6 +103,42 @@ return {
           cond = function(client)
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
+        },
+        ["<Leader>r"] = {
+          desc = "Targets",
+          cond = function(client) return client.name == "rust-analyzer" end,
+        },
+
+        ["<Leader>rw"] = {
+          function()
+            vim.cmd "RustAnalyzer target wasm32-unknown-unknown"
+            vim.notify "Rust target → wasm32"
+          end,
+          desc = "Set WASM target",
+          cond = function(client) return client.name == "rust-analyzer" end,
+        },
+
+        ["<Leader>rn"] = {
+          function()
+            vim.cmd "RustAnalyzer target x86_64-pc-windows-msvc"
+            vim.notify "Rust target → native (msvc)"
+          end,
+          desc = "Set native target",
+          cond = function(client) return client.name == "rust-analyzer" end,
+        },
+
+        ["<Leader>rt"] = {
+          function()
+            local current = vim.g._rust_target == "wasm32-unknown-unknown" and "x86_64-pc-windows-msvc"
+              or "wasm32-unknown-unknown"
+
+            vim.g._rust_target = current
+            vim.cmd("RustAnalyzer target " .. current)
+
+            vim.notify("Rust target → " .. current)
+          end,
+          desc = "Toggle WASM/native",
+          cond = function(client) return client.name == "rust-analyzer" end,
         },
       },
     },

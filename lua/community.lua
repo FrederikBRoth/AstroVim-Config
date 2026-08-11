@@ -7,7 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
-  { import = "astrocommunity.code-runner.compiler-nvim" },
+  { import = "astrocommunity.code-runner.overseer-nvim" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.tailwindcss" },
